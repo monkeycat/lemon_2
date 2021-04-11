@@ -7,9 +7,6 @@ Company: 湖南零檬信息技术有限公司
 ======================
 """
 from configparser import ConfigParser
-import os
-
-from Common.handle_path import conf_dir
 
 class HandleConfig(ConfigParser):
 
@@ -18,11 +15,10 @@ class HandleConfig(ConfigParser):
         self.read(file_path, encoding="utf-8")
 
 
-
-file_path = os.path.join(conf_dir, "nmb.ini")
+import os
+file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"nmb.ini")
 conf = HandleConfig(file_path)
 
-
-# if __name__ == '__main__':
-#     conf = HandleConfig("nmb.ini")
-#     conf.get("log","name")
+if __name__ == '__main__':
+    conf = HandleConfig("nmb.ini")
+    conf.get("log","name")

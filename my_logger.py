@@ -8,17 +8,12 @@ Company: 湖南零檬信息技术有限公司
 """
 
 import logging
-import os
-
-from Common.handle_config import conf
-from Common.handle_path import logs_dir
 
 class MyLogger(logging.Logger):
 
-    def __init__(self,file=None):
+    def __init__(self,name,level="INFO",file=None):
         # 设置输出级别、输出渠道、输出日志格式
-        # super().__init__(name,level)
-        super().__init__(conf.get("log","name"),conf.get("log","level"))
+        super().__init__(name,level)
 
         # 日志格式
         fmt = '%(asctime)s %(name)s %(levelname)s %(filename)s-%(lineno)d line：%(message)s'
@@ -36,13 +31,9 @@ class MyLogger(logging.Logger):
             self.addHandler(handle2)
 
 
-# 是否需要写入文件
-if conf.getboolean("log","file_ok"):
-    file_name = os.path.join(logs_dir,conf.get("log","file_name"))
-else:
-    file_name = None
+logger = MyLogger("py30",file="my_logger.log")
 
 
-logger = MyLogger(file_name)
-
-# logger.info("1111111111111111")
+if __name__ == '__main__':
+    mlogger = MyLogger("py30",file="my_logger.log")
+    mlogger.info("测试，我自己封装的日志类！！！！")

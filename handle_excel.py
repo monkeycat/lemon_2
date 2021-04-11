@@ -15,7 +15,6 @@ excel类，你的需求是实现是什么?
 
 """
 from openpyxl import load_workbook
-import json
 
 
 class HandleExcel:
